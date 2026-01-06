@@ -4,4 +4,5 @@
 Berkay Aras 23040301055 berkayaras@stu.topkapi.edu.tr
 
 
-Aktif Websitemin Linki : 
+Aktif Websitemin Linki : https://neurotakip.pythonanywhere.com/
+
