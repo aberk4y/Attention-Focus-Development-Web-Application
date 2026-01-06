@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dikkat Ölçüm ve Gelişim Uygulaması{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block head_css %}{% endblock %} 
+</head>
+<body>
+    
+    <nav class="ust-menu">
+        <div class="orta-kutu" style="max-width: 1100px; display: flex; justify-content: space-between; align-items: center;">
+            <a class="menu-link" style="font-size: 1.2rem; font-weight: bold;" href="{{ url_for('dashboard') }}" style="text-align: center;margin: 0 auto;justify-content: center;">Dikkat ve Odak Gelişim Analizi</a>
+            
+            <div class="menu-sag">
+                {% if current_user.is_authenticated %}
+                    <a class="menu-link" href="{{ url_for('logout') }}">Çıkış Yap ({{ current_user.username }})</a>
+                    {% if current_user.is_admin %}
+                    <a class="menu-link" style="color: #ffc107;" href="{{ url_for('admin_panel') }}">Admin</a>
+                    {% endif %}
+                {% else %}
+                    <a class="menu-link" href="{{ url_for('login') }}">Giriş</a>
+                    <a class="menu-link" href="{{ url_for('register') }}">Kayıt Ol</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="orta-kutu" style="max-width: 1100px;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="uyari-mesaji {% if category == 'success' %}uyari-basarili{% else %}uyari-hata{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block body_js %}{% endblock %}
+</body>
+</html>

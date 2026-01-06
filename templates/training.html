@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Antrenman Alanı{% endblock %}
+
+{% block content %}
+    <h1 class="ant-baslik" style="margin-top: 20px;text-align: center;"> Antrenman Alanı</h1>
+    
+    <div style="width: 100%;justify-content: center;margin: 0 auto;border-radius: 5px;background-color: #cce5ff;padding: 10px; margin-bottom: 20px;">
+        <p style="font-size: 1.1rem; color: #000000;text-align: center; margin: 0;">
+            Burada tekil testleri istediğiniz kadar çözebilir ve kendinizi geliştirebilirsiniz. Bu skorlar genel ortalamanıza yansımaz, anlık performansınızı gösterir. 
+        </p>
+    </div>
+    
+    <div class="kart-konteyner" style="display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap;">
+        
+        <div style="flex: 2; display: flex; flex-direction: column; gap: 20px;">
+    
+            <div class="test-karti mavi-zemin w-100">
+                <h5 class="kart-baslik">1. Stroop Testi</h5>
+                <p class="kart-aciklama">
+                    <b>Ölçüm Alanı:</b> Seçici Dikkat ve Engelleme Kontrolü 
+                </p>
+                <hr>
+                <a href="{{ url_for('analysis', mode='training', test='stroop') }}" 
+                   class="ana-buton beyaz-yazi d-block w-100 text-center">
+                    Stroop Testini Başlat
+                </a>
+            </div>
+
+            <div class="test-karti sari-zemin w-100">
+                <h5 class="kart-baslik">2. Sürekli Dikkat (CPT)</h5>
+                <p class="kart-aciklama">
+                    <b>Ölçüm Alanı:</b> Sürdürülen Dikkat ve Sabır 
+                </p>
+                <hr>
+                <a href="{{ url_for('analysis', mode='training', test='cpt') }}" 
+                   class="ana-buton beyaz-yazi d-block w-100 text-center">
+                    CPT Testini Başlat
+                </a>
+            </div>
+
+            <div class="test-karti kirmizi-zemin w-100">
+                <h5 class="kart-baslik">3. Basit Tepki Süresi (SRT)</h5>
+                <p class="kart-aciklama">
+                    <b>Ölçüm Alanı:</b> Bilişsel Hız ve Temel Refleks 
+                </p>
+                <hr>
+                <a href="{{ url_for('analysis', mode='training', test='srt') }}" 
+                   class="ana-buton beyaz-yazi d-block w-100 text-center">
+                    SRT Testini Başlat
+                </a>
+            </div>
+
+            <div class="test-karti mor-zemin w-100" style="background-color: #6f42c1; color: white; border-radius: 10px;text-align: center;">
+                <h5 class="kart-baslik" style="color: white;">4. Çalışan Bellek (N-Back)</h5>
+                <p class="kart-aciklama" style="color: rgba(255,255,255,0.9);">
+                    <b>Ölçüm Alanı:</b> Bilişsel Yük ve Çalışan Bellek
+                </p>
+                <hr style="border-color: rgba(255,255,255,0.2);">
+                <a href="{{ url_for('analysis', mode='training', test='nback') }}" 
+                   class="ana-buton beyaz-yazi d-block w-100 text-center" style="background-color: #5a32a3; border: none;">
+                    N-Back Testini Başlat
+                </a>
+            </div>
+
+        </div>
+
+        <div style="flex: 1; min-width: 300px;">
+            <div class="golgeli-kutu ipucu-karti" style="padding: 20px;">
+                <h2 style="color: #8a2701; border-bottom: 1px solid #cce5ff; padding-bottom: 10px; text-align: center;">
+                    Dikkat İpuçları
+                </h2>
+                
+                <h3 style="font-size: 1.2rem; margin-top: 15px;">1. Pomodoro Tekniği Uygulayın</h3>
+                <p>25 dakika odaklanma, 5 dakika mola kuralını uygulamayı deneyin.</p>
+                
+                <h3 style="font-size: 1.2rem; margin-top: 15px;">2. Derin Nefes Alın</h3>
+                <p>Bir göreve başlamadan önce 1 dakika derin nefes egzersizi yapmak, dikkatinizi toparlar.</p>
+
+                <h3 style="font-size: 1.2rem; margin-top: 15px;">3. Çevresel Faktörleri Düzenleyin</h3>
+                <p>İnsanlar genellikle dikkati dağıtan nedenlerin konsantrasyonu engellediğini hafife alırlar. Arka plan seslerini ve bildirimleri kapatın.</p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

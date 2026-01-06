@@ -1,0 +1,196 @@
+{% extends "layout.html" %}
+
+{% block title %}Yönetici Paneli{% endblock %}
+
+{% block content %}
+<div style="margin-top: 30px;">
+    
+    <h1 class="ana-baslik">Yönetici Paneli</h1>
+    
+    <div class="kart-konteyner">
+        <div class="golgeli-kutu" style="flex: 1; text-align: center; border-left: 5px solid #000000;">
+            <h3>Toplam Kullanıcı</h3>
+            <p style="font-size: 2rem; font-weight: bold;">{{ users|length }}</p>
+        </div>
+        <div class="golgeli-kutu" style="flex: 1; text-align: center; border-left: 5px solid #28a745;">
+            <h3>Toplam Test Kaydı</h3>
+            <p style="font-size: 2rem; font-weight: bold;">{{ results|length }}</p>
+        </div>
+    </div>
+
+    <div class="golgeli-kutu" style="margin-bottom: 25px; padding: 20px;">
+        <div style="display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+            
+            <form method="GET" action="{{ url_for('admin_panel') }}" style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+                
+                <div style="text-align: left;">
+                    <label style="display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; color: #555;">Bölüm:</label>
+                    <input type="text" name="bolum" class="form-control" placeholder="Örn: Yazılım" value="{{ request.args.get('bolum', '') }}" style="width: 140px;">
+                </div>
+
+                <div style="text-align: left;">
+                    <label style="display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; color: #555;">Yaş:</label>
+                    <input type="number" name="yas" class="form-control" placeholder="21" value="{{ request.args.get('yas', '') }}" style="width: 70px;">
+                </div>
+
+                <div style="text-align: left;">
+                    <label style="display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; color: #555;">Cinsiyet:</label>
+                    <select name="cinsiyet" class="form-control" style="width: 110px;">
+                        <option value="">Hepsi</option>
+                        <option value="Erkek" {% if request.args.get('cinsiyet') == 'Erkek' %}selected{% endif %}>Erkek</option>
+                        <option value="Kadın" {% if request.args.get('cinsiyet') == 'Kadın' %}selected{% endif %}>Kadın</option>
+                        <option value="Belirtmek İstemiyorum" {% if request.args.get('cinsiyet') == 'Belirtmek İstemiyorum' %}selected{% endif %}>Diğer</option>
+                    </select>
+                </div>
+
+                <div style="text-align: left;">
+                    <label style="display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; color: #555;">Test:</label>
+                    <select name="test_type" class="form-control" style="width: 100px;">
+                        <option value="">Hepsi</option>
+                        <option value="Stroop" {% if request.args.get('test_type') == 'Stroop' %}selected{% endif %}>Stroop</option>
+                        <option value="CPT" {% if request.args.get('test_type') == 'CPT' %}selected{% endif %}>CPT</option>
+                        <option value="SRT" {% if request.args.get('test_type') == 'SRT' %}selected{% endif %}>SRT</option>
+                        <option value="N-Back" {% if request.args.get('test_type') == 'N-Back' %}selected{% endif %}>N-Back</option>
+                    </select>
+                </div>
+
+                <div style="text-align: left;">
+                    <label style="display: block; font-size: 0.8rem; margin-bottom: 5px; font-weight: bold; color: #555;">Mod:</label>
+                    <select name="mod" class="form-control" style="width: 110px;">
+                        <option value="">Hepsi</option>
+                        <option value="analiz" {% if request.args.get('mod') == 'analiz' %}selected{% endif %}>Analiz</option>
+                        <option value="antrenman" {% if request.args.get('mod') == 'antrenman' %}selected{% endif %}>Antrenman</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                    <button type="submit" class="ana-buton mavi-buton" style="padding: 8px 18px;">Uygula</button>
+                    <a href="{{ url_for('admin_panel') }}" style="color: #d60b0b; text-decoration: none; font-size: 0.7rem;">Sıfırla</a>
+                </div>
+            </form>
+
+            <div style="width: 1px; background-color: #ddd; height: 40px; align-self: flex-end;"></div>
+
+            <div style="display: flex; align-items: flex-end;">
+                <a href="{{ url_for('export_excel', bolum=request.args.get('bolum', ''), yas=request.args.get('yas', ''), cinsiyet=request.args.get('cinsiyet', ''), test_type=request.args.get('test_type', ''), mod=request.args.get('mod', '')) }}" 
+                    class="ana-buton yesil-buton" 
+                    style="text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 10px 18px; height: 42px; white-space: nowrap;">
+                     Excel İndir
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="golgeli-kutu">
+        <h3 style="margin-bottom: 20px;">Tüm Test Sonuçları</h3>
+        
+        <div style="overflow-x: auto;"> 
+            <table class="veri-tablosu">
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Kullanıcı</th>
+                        <th>Yaş</th> 
+                        <th>Cinsiyet</th> 
+                        <th>Bölüm</th> 
+                        <th>Test Türü</th>
+                        <th>Mod</th>
+                        <th>Puan (%)</th>
+                        <th>Hız (ms)</th>
+                        <th>İşlem</th> </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr id="row-{{ result.id }}"> <td>{{ result.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
+                        <td style="font-weight: bold;">{{ result.tester.username }}</td>
+                        <td>{{ result.tester.yas }}</td> 
+                        <td>{{ result.tester.cinsiyet }}</td> 
+                        <td>{{ result.tester.bolum }}</td> 
+                        <td>
+                            <span class="etiket 
+                                {% if result.test_type == 'Stroop' %}etiket-mavi
+                                {% elif result.test_type == 'CPT' %}etiket-sari
+                                {% elif result.test_type == 'SRT' %}etiket-yesil
+                                {% else %}etiket-kirmizi{% endif %}">
+                                {{ result.test_type }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if result.is_analysis_mode %}
+                                <span style="color: rgb(0, 0, 0);">Analiz</span>
+                            {% else %}
+                                <span style="color: rgb(0, 0, 0);">Antrenman</span>
+                            {% endif %}
+                        </td>
+                        <td>%{{ result.accuracy_percent|round(1) }}</td>
+                        <td>{{ result.reaction_time_ms|int }} ms</td>
+                        <td>
+                            <button onclick="kaydiSil('{{ result.id }}')" class="sil-buton">
+                                 Sil
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="10" style="text-align: center;">Henüz hiç kayıt yok veya filtreye uygun sonuç bulunamadı.</td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .sil-buton {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .sil-buton:hover {
+        background-color: #cc0000;
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+function kaydiSil(resultId) {
+    if (confirm("Bu test kaydını kalıcı olarak silmek istediğinize emin misiniz?")) {
+        fetch(`/delete_result/${resultId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const satir = document.getElementById(`row-${resultId}`);
+                if (satir) {
+                    satir.style.transition = "all 0.4s";
+                    satir.style.opacity = "0";
+                    satir.style.transform = "translateX(20px)";
+                    setTimeout(() => satir.remove(), 400);
+                }
+            } else {
+                alert("Hata: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert("İşlem gerçekleştirilemedi.");
+        });
+    }
+}
+</script>
+
+{% endblock %}

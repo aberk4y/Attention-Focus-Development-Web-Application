@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block title %}Ana Panel - {{ current_user.username }}{% endblock %}
+
+{% block content %}
+    <h1 class="ana-baslik" style="margin-top: 20px;">Hoş Geldiniz, {{ current_user.username }}</h1>
+    
+    <div class="kart-konteyner">
+        <a href="{{ url_for('analysis') }}" class="islev-karti mavi-kart">
+            <h2 style="font-size: 1.5rem;"><i class="fas fa-brain"></i> Günlük Analiz</h2>
+            <p style="font-size: 0.9rem;">
+                Sırayla 4 testi (Stroop, CPT, SRT, N-Back) çözerek detaylı günlük raporunuzu alın.
+            </p>
+            <hr style="border-color: rgba(0, 0, 0, 0.5);">
+            <p class="small">Tahmini Süre: 1-2 Dakika</p>
+            <button class="ana-buton" style="background-color: white; color: #007bff; margin-top: 15px;">
+                Analizi Başlat 
+            </button>
+        </a>
+
+        <a href="{{ url_for('training') }}" class="islev-karti yesil-kart">
+            <h2 style="font-size: 1.5rem;"><i class="fas fa-dumbbell"></i> Antrenman Alanı</h2>
+            <p style="font-size: 0.9rem;">
+                Tekil testleri istediğiniz kadar çözün. Skorlar ortalamanızı etkilemez.
+            </p>
+            <br><br>
+            <button class="ana-buton" style="background-color: white; color: #28a745; margin-top: 15px;">
+                Antrenman Yap
+            </button>
+        </a>
+    </div>
+    
+    <div class="kart-konteyner" style="align-items: flex-start;">
+        
+        <div class="grafik-alani" style="flex: 2;">
+            <h3 style="text-align: center;">Haftalık Gelişim Grafiği</h3>
+            <canvas id="weeklyPerformanceChart" width="400" height="150"></canvas>
+            <div class="alert alert-info" role="alert" style="margin-bottom: 20px;">
+                <h4 class="alert-heading" style="text-align: center;">Haftalık Gelişim Analizi Sonucun</h4>
+                <p>{{ analiz_mesaji | safe }}</p>
+            </div>
+        </div>
+        
+        <div class="golgeli-kutu ipucu-karti" style="flex: 1; padding: 20px;">
+            <h3 style="text-align: center;">Gelişim Tavsiye Köşesi</h3>
+            <p class="small">
+             ** En verimli çalışma saatlerinizde derin odak gerektiren görevlere zaman ayırın. Beyninizin 'Prime Time'ını boşa harcamayın!"
+            </p>
+            <p>
+                ** Dikkatiniz, sahip olduğunuz en değerli para birimidir; onu bildirimlerle harcamayın. Odaklanma gerektiren bir işe başlarken telefonunuzu başka bir odaya bırakın.
+                 Görüş alanınızda olmayan bir telefon, dikkatiniz için en büyük özgürlüktür!
+            </p>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block body_js %}
+<script src="https://kit.fontawesome.com/b9442013f9.js" crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}Giriş Yap / Kayıt Ol{% endblock %}
+
+{% block content %}
+<div class="orta-kutu" style="max-width: 450px; margin-top: 40px;">
+    
+    <h2 class="text-center ana-baslik" style="text-align: center;">Hoş Geldiniz</h2>
+
+    {% if show_register %}
+     <div class="golgeli-kutu">
+        <h4 class="text-center" style="margin-bottom: 20px;text-align: center;">Yeni Hesap Oluştur</h4>
+        <form action="{{ url_for('register') }}" method="POST">
+            
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" class="form-control" id="username" name="username" required style="margin-bottom: 15px;">
+            
+            <label for="password">Şifre</label>
+            <input type="password" class="form-control" id="password" name="password" required style="margin-bottom: 15px;">
+
+            <label for="yas">Yaş</label>
+            <input type="number" class="form-control" id="yas" name="yas" required min="17" max="100" style="margin-bottom: 15px;">
+
+            <label for="cinsiyet">Cinsiyet</label>
+            <select class="form-control" id="cinsiyet" name="cinsiyet" required style="margin-bottom: 15px;">
+                <option value="" disabled selected>Seçiniz...</option>
+                <option value="Erkek">Erkek</option>
+                <option value="Kadın">Kadın</option>
+                <option value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</option>
+            </select>
+
+            <label for="bolum">Bölüm</label>
+            <input type="text" class="form-control" id="bolum" name="bolum" placeholder="Örn: Yazılım Mühendisliği" required style="margin-bottom: 15px;">
+            <button type="submit" class="ana-buton yesil-buton mt-2">Kayıt Ol</button>
+        </form>
+        <p class="text-center mt-3" style="text-align: center;">Hesabın var mı? <a href="{{ url_for('login') }}">Giriş Yap</a></p>
+     </div>
+    {% else %}
+        <div class="golgeli-kutu">
+            <h4 class="text-center" style="margin-bottom: 20px;text-align: center;">Giriş Yap</h4>
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="username">Kullanıcı Adı</label>
+                <input type="text" class="form-control" id="username" name="username" required style="margin-bottom: 15px;">
+                
+                <label for="password">Şifre</label>
+                <input type="password" class="form-control" id="password" name="password" required style="margin-bottom: 15px;">
+                
+                <button type="submit" class="ana-buton mavi-buton">Giriş Yap</button>
+            </form>
+            <p class="text-center mt-3" style="text-align: center;">Hesabın yok mu? <a href="{{ url_for('register') }}">Kayıt Ol</a></p>
+        </div>
+    {% endif %}
+    
+</div>
+{% endblock %}

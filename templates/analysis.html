@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}Test Akışı{% endblock %}
+
+{% block content %}
+<div class="orta-kutu" style="max-width: 800px; margin-top: 40px;">
+    
+    <div class="golgeli-kutu text-center">
+        <div class="progress-wrapper" style="width: 100%; background-color: #e9ecef; height: 12px; border-radius: 10px; margin-bottom: 25px; overflow: hidden; display: none;" id="progress-container">
+          <div id="progress-bar" style="width: 0%; background: linear-gradient(90deg, #28a745, #218838); height: 100%; transition: width 0.6s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"></div>
+        </div>
+        <h1 id="test-title" class="analiz-baslik">Günlük Analiz</h1>
+        <p id="test-description" class="lead" style="text-align: center;">4 aşamalı (Stroop, CPT, SRT ve N-Back) analiz başlamak üzere.</p>
+        
+        <hr>
+        
+        <div id="test-container" style="min-height: 350px; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; flex-direction: column;">
+            
+            <button id="start-button" class="ana-buton yesil-buton" style="width: auto; padding: 15px 30px;">
+                Analizi Başlat
+            </button>
+            
+            <div id="stimulus-area" style="display:none; font-weight: bold;"></div> 
+            
+            <div id="feedback-area" style="display:none; margin-top: 20px;"></div>
+
+        </div>
+        
+        <div id="response-buttons" style="display:none;" class="mt-3">
+            <p class="text-muted" style="font-size: 0.9rem;">
+                Tepki vermek için testine göre <b>Q-P</b> veya <b>BOŞLUK</b> tuşlarını kullanın.
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="ana-buton mavi-buton" style="width: 120px; font-size: 0.9rem;">Q Tuşu</button>
+                <button class="ana-buton yesil-buton" style="width: 120px; font-size: 0.9rem; background-color: #6c757d;">Boşluk</button>
+                <button class="ana-buton kirmizi-buton" style="width: 120px; font-size: 0.9rem; background-color: #dc3545;">P Tuşu</button> 
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block body_js %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/test_stroop.js') }}"></script>
+<script src="{{ url_for('static', filename='js/test_cpt.js') }}"></script>
+<script src="{{ url_for('static', filename='js/test_srt.js') }}"></script>
+<script src="{{ url_for('static', filename='js/nback.js') }}"></script>
+{% endblock %}

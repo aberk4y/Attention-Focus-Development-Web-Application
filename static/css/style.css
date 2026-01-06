@@ -1,0 +1,186 @@
+body {
+    background-image: url(/static/images/image-cache.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #f0f2f5; 
+    background-position: center bottom;
+    font-family: Arial, sans-serif;
+    padding-bottom: 50px; 
+}
+/*content: '';*/
+body::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+}
+
+.orta-kutu {
+    max-width: 600px; 
+    margin: 0 auto; 
+    box-shadow: #000000;
+    
+}
+
+.golgeli-kutu {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.ana-baslik {
+    color: #007bff; 
+    margin-bottom: 25px;
+}
+.ant-baslik{
+    color: #007bff; 
+    margin-bottom: 25px;
+    text-align: center; 
+}
+.analiz-baslik{
+    color: #007bff; 
+    margin-bottom: 25px;
+    text-align: center; 
+}
+
+.ana-buton {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.mavi-buton {
+    background-color: #007bff;
+    color: white;
+}
+.mavi-buton:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.yesil-buton {
+    background-color: #28a745;
+    color: white;
+}
+.yesil-buton:hover {
+    background-color: #1e7e34;
+    color: white;
+}
+
+.uyari-mesaji {
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+.uyari-basarili {
+    background-color: #d4edda;
+    color: #38d35c;
+    border-color: #c3e6cb;
+}
+.uyari-hata {
+    background-color: #f8d7da;
+    color: #b62533;
+    border-color: #f5c6cb;
+}
+
+.ust-menu {
+    background-color: #343a40; 
+    color: white;
+    padding: 10px 0;
+    border-radius: 20px;
+}
+
+
+.menu-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+}
+.menu-link:hover {
+    color: rgb(76, 199, 72);
+}
+
+.mavi-zemin {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+}
+.sari-zemin {
+    background-color: #ffc107;
+    color: #343a40;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+}
+.kirmizi-zemin {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+}
+
+.beyaz-yazi {
+    color: #000000 ;
+    width: 93%; 
+    font-weight: bold;
+    margin: 0 auto;
+}
+.beyaz-yazi:hover {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+.test-karti {
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+}
+
+.veri-tablosu {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.veri-tablosu th, .veri-tablosu td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.veri-tablosu th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+.veri-tablosu tr:hover {
+    background-color: #f1f1f1;
+}
+
