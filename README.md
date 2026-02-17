@@ -74,19 +74,34 @@ The project demonstrates full-stack web development principles including backend
 ## 📂 Project Structure
 
 ```
+Attention-Focus-Development-Web-Application/
+│
 ├── app.py
 ├── config.py
 ├── requirements.txt
 ├── README.md
+├── .gitignore
 │
 ├── database/
+│   ├── __init__.py
+│   ├── models.py
 │   └── database.db
 │
 ├── static/
+│   ├── css/
+│   ├── images/
+│   └── js/
 │
 ├── templates/
+│   ├── admin.html
+│   ├── analysis.html
+│   ├── dashboard.html
+│   ├── index.html
+│   ├── layout.html
+│   └── training.html
 │
 └── docs/
+    └── BerkayAras_Proje_Raporu.pdf
 ```
 
 ---
