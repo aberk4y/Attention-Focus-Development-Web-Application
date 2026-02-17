@@ -72,17 +72,22 @@ The project demonstrates full-stack web development principles including backend
 ---
 
 ## 📂 Project Structure
+
+```
 ├── app.py
 ├── config.py
 ├── requirements.txt
 ├── README.md
 │
 ├── database/
-│ └── database.db
+│   └── database.db
 │
 ├── static/
+│
 ├── templates/
+│
 └── docs/
+```
 
 ---
 
